@@ -1,0 +1,231 @@
+{
+  "info": {
+    "_postman_id": "57d6f05c-f2c6-4891-8fb9-d338cbb8a6d4",
+    "name": "My Collection",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53861761",
+    "_collection_link": "https://go.postman.co/collection/53861761-57d6f05c-f2c6-4891-8fb9-d338cbb8a6d4?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "quote",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"currencyPair\": \"BTCZAR\",\r\n  \"payAmount\": \"1000.00\",\r\n  \"payCurrency\": \"ZAR\",\r\n  \"side\": \"BUY\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/quotes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "quotes"
+          ]
+        },
+        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+      },
+      "response": []
+    },
+    {
+      "name": "payments",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Successful POST request\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"quoteId\": \"8a9b28a5-b883-4748-be1b-894928044efb\",\n  \"customerReference\": \"customer-123\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/payments",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "payments"
+          ]
+        },
+        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+      },
+      "response": []
+    },
+    {
+      "name": "payments/execute",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/payments/:id/execute",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "payments",
+            ":id",
+            "execute"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "9bf9b35c-4feb-45bb-9415-946b7e59569b"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "payments/get",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/payments/:id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "payments",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "9bf9b35c-4feb-45bb-9415-946b7e59569b"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "payment/refund",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/payments/:id/:customerReference/refund",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "payments",
+            ":id",
+            ":customerReference",
+            "refund"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "c6c9f973-a3f2-4ff3-a9e7-8519bd6dae6e"
+            },
+            {
+              "key": "customerReference",
+              "value": "customer-123"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "payment/paymentStatusHistory",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/payments/:id/status",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "payments",
+            ":id",
+            "status"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "ca3d244b-b667-4f50-9297-13d32de493a4"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
